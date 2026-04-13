@@ -12,7 +12,16 @@ MCP (Model Context Protocol) server to control the ZEsarUX emulator via ZRCP.
 
 ## Installation
 
+### Automatic (via AI agent)
+
+Tell your AI agent:
+> Install the ZEsarUX MCP server following the instructions at https://raw.githubusercontent.com/carlosparamio/zesarux-mcp-server/main/AGENT_INSTRUCTIONS.md
+
+### Manual
+
 ```bash
+git clone https://github.com/carlosparamio/zesarux-mcp-server.git
+cd zesarux-mcp-server
 npm install
 npm run build
 ```
