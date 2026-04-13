@@ -35,22 +35,60 @@ server.tool(
 
 1. General Usage:
    - All emulator operations are performed via the 'zrcp' tool.
-   - IMPORTANT: Run 'zrcp(command: "help")' first to discover all available ZRCP commands (there are over 120).
+   - Run 'zrcp command="help"' to discover all available ZRCP commands (129 total).
+   - Use 'get-ocr' to read text from the screen - this is the most effective way to see what's displayed.
 
-2. Spectrum 48K & Keyword Machines:
-   - Keyword Entry: These machines use single-key keywords. Do NOT type full words like "LOAD".
-   - Common Key Mapping:
-     * 'J' translates to LOAD
-     * 'P' translates to PRINT
-     * 'R' translates to RUN
-   - Entering LOAD "":
-     Use 'send-keys-string 100 J""' followed by 'send-keys-ascii 100 13'.
-   - Enter Key: Use ASCII code 13 to simulate the Enter/Return key via 'send-keys-ascii'.
-   - Screen Feedback: Commands like 'LOAD ""' clear the screen. If 'get-ocr' returns an empty string or nothing, it usually means the command was successful and the machine is now in a "listening" state (waiting for tape).
+2. ZEsarUX Menus:
+   - ZEsarUX displays menus that block the emulator interface.
+   - Use 'close-all-menus' to dismiss any open menu and return control to the emulator.
+   - If the emulator seems unresponsive, try closing menus first.
 
-3. Maintenance:
-   - Use 'reset-cpu' to return to the copyright screen.
-   - Use 'get-current-machine' to verify which hardware is being emulated.`
+3. Spectrum 48K - Keyword Mode (K mode):
+   - In 48K mode, the default is K (keyword) mode - single keys produce BASIC keywords.
+   - Do NOT type full words like "PRINT" or "LOAD". Use the keyword key instead.
+   - Common keyword keys:
+     * P = PRINT
+     * J = LOAD
+     * R = RUN
+     * G = GOTO
+     * K = LET
+     * O = POKE
+     * N = NEXT
+     * F = FOR
+     * I = IF
+   - Example - type PRINT "HELLO":
+     zrcp command="send-keys-string P\\"HELLO\\""
+     zrcp command="send-keys-ascii 13"
+
+4. Modifier Keys (Symbol Shift / Caps Shift):
+   - Symbol Shift (SS) is needed for symbols and extended keywords.
+   - Caps Shift (CS) is needed for cursor movement, DELETE, etc.
+   - Format: send-keys-string uses ^ for Caps Shift and @ for Symbol Shift before the key.
+   - Examples:
+     * ^1 = EDIT (Caps Shift + 1)
+     * ^0 = DELETE (Caps Shift + 0)
+     * ^5 = cursor left, ^6 = cursor down, ^7 = cursor up, ^8 = cursor right
+     * @P = " (Symbol Shift + P)
+     * @L = = (Symbol Shift + L)
+     * @Z = : (Symbol Shift + Z)
+     * @8 = ( , @9 = )
+   - Example - type 10 PRINT "HELLO" and press ENTER:
+     zrcp command="send-keys-string 10P@PHELLO@P"
+     zrcp command="send-keys-ascii 13"
+
+5. Entering LOAD "":
+   - zrcp command="send-keys-string J@P@P"
+   - zrcp command="send-keys-ascii 13"
+   - After LOAD "", the screen clears and waits for tape. Empty OCR is normal.
+
+6. Useful Commands:
+   - get-ocr: Read screen text
+   - get-registers: CPU state
+   - view-basic: Show BASIC listing
+   - reset-cpu: Soft reset
+   - hard-reset-cpu: Full reset
+   - get-current-machine: Check emulated machine
+   - smartload <file>: Load tape/snapshot/disk`
       }]
     };
   }
