@@ -19,14 +19,132 @@ npm run build
 
 ## Configuration
 
-Add to your MCP client configuration (e.g. `~/.kiro/mcp.json`):
+### Claude Desktop
+
+Edit `~/.config/claude/claude_desktop_config.json` (Linux) or `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
 
 ```json
 {
   "mcpServers": {
     "zesarux": {
       "command": "node",
-      "args": ["/path/to/zesarux/mcp-server/dist/index.js"],
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+### Kiro
+
+Edit `~/.kiro/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+### Opencode
+
+Edit `~/.config/opencode/config.json`:
+
+```json
+{
+  "mcp_servers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+### Gemini CLI
+
+Global config at `~/.gemini/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+Project-local config at `.gemini/settings.json` in your project root (same format).
+
+### VS Code (GitHub Copilot)
+
+Create `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+### Cursor
+
+Create `.cursor/mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
+      "env": {
+        "ZESARUX_HOST": "localhost",
+        "ZESARUX_PORT": "10000"
+      }
+    }
+  }
+}
+```
+
+### LM Studio
+
+Edit `mcp.json` in LM Studio's config directory (`~/.lmstudio/` on Linux/macOS, `%USERPROFILE%\.lmstudio\` on Windows):
+
+```json
+{
+  "mcpServers": {
+    "zesarux": {
+      "command": "node",
+      "args": ["/path/to/zesarux-mcp-server/dist/index.js"],
       "env": {
         "ZESARUX_HOST": "localhost",
         "ZESARUX_PORT": "10000"
